@@ -21,4 +21,7 @@ variable "build_password" {
   type =  string
   sensitive = true
 }
-
+variable "skip_export" {
+  default = "false"
+  type = string
+}

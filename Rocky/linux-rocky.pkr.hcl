@@ -16,16 +16,16 @@ source "vmware-iso" "home-rock" {
   vnc_over_websocket = "true"
   insecure_connection = "true"
   network_name = "VM Network"
-  skip_export = "true"
-  iso_url = "http://192.168.1.5/repo/Rocky-8.5-x86_64-boot.iso"
+  skip_export = var.skip_export
+  iso_url = "http://${var.repo_host}/repo/Rocky-8.5-x86_64-boot.iso"
   iso_checksum = "sha256:5a0dc65d1308e47b51a49e23f1030b5ee0f0ece3702483a8a6554382e893333c"
   #communicator = "none"
   keep_registered = "true"
   boot_command = [
     #"<wait10m>e<down><down><down><left><del><del><del><del><del>",
     "<up><up<tab><bs><bs><bs><bs><bs>",
-    "inst.repo=http://192.168.1.5/repo/Linux/Rocky-8.5-x86_64/ ",
-    "inst.ks=http://192.168.1.5/kickstart/home-esx-rock.ks ",
+    "inst.repo=http://${var.repo_host}/repo/Linux/Rocky-8.5-x86_64/ ",
+    "inst.ks=http://${var.repo_host}/kickstart/home-esx-rock.ks ",
     "<enter>"
     #"<leftCtrlOn>c<leftCtrlOff>",
     #"debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
@@ -36,8 +36,8 @@ source "vmware-iso" "home-rock" {
     #"initrd=/install/initrd.gz -- <enter>"
   ]
 
-  ssh_username = "packer"
-  ssh_password = "packer"
+  ssh_username = var.build_user
+  ssh_password = var.build_password
   shutdown_command = "shutdown -P now"
 }
 
