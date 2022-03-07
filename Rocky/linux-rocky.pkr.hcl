@@ -20,7 +20,7 @@ source "vmware-iso" "home-rock" {
   iso_url = "http://${var.repo_host}/repo/Rocky-8.5-x86_64-boot.iso"
   iso_checksum = "sha256:5a0dc65d1308e47b51a49e23f1030b5ee0f0ece3702483a8a6554382e893333c"
   #communicator = "none"
-  keep_registered = "true"
+  #keep_registered = "true"
   boot_command = [
     #"<wait10m>e<down><down><down><left><del><del><del><del><del>",
     "<up><up<tab><bs><bs><bs><bs><bs>",
@@ -35,9 +35,11 @@ source "vmware-iso" "home-rock" {
     #"keyboard-configuration/variant=USA console-setup/ask_detect=false ",
     #"initrd=/install/initrd.gz -- <enter>"
   ]
-
+  format = "ova"
   ssh_username = var.build_user
   ssh_password = var.build_password
+  ssh_timeout = "20m"
+  ssh_keep_alive_interval = "30s"
   shutdown_command = "shutdown -P now"
 }
 
