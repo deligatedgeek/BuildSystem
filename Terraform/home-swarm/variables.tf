@@ -22,3 +22,9 @@ variable "esxi_username" {
 
 variable "esxi_password" { # Unspecified will prompt
 }
+
+variable "docker_nodes" {
+  description = "Docker nodes"
+  type	      = list(string)
+  default     = ["home-esx-swarm-01", "home-esx-swarm-02", "home-esx-swarm-03"]
+}
