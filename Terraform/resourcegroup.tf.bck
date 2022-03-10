@@ -1,0 +1,18 @@
+#########################################
+#  Resource Pools
+#########################################
+resource "esxi_resource_pool" "Terraform" {
+  resource_pool_name = "Terraform"
+  cpu_min            = "100"
+  cpu_min_expandable = "true"
+  cpu_max            = "8000"
+  cpu_shares         = "normal"
+  mem_min            = "200"
+  mem_min_expandable = "false"
+  mem_max            = "8192"
+  mem_shares         = "normal"
+}
+
+resource "esxi_resource_pool" "pool2" {
+  resource_pool_name = "${esxi_resource_pool.Terraform.resource_pool_name}/pool2"
+}
