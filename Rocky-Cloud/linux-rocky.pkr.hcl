@@ -7,7 +7,7 @@ packer {
   }
 }
 
-source "vmware-iso" "home-rock" {
+source "vmware-iso" "home-rock-cloud" {
   remote_type = "esx5"
   remote_host = var.esx_host
   remote_password = var.esx_password
@@ -26,7 +26,7 @@ source "vmware-iso" "home-rock" {
     #"<wait10m>e<down><down><down><left><del><del><del><del><del>",
     "<up><up<tab><bs><bs><bs><bs><bs>",
     "inst.repo=http://${var.repo_host}/repo/Linux/Rocky-8.5-x86_64/ ",
-    "inst.ks=http://${var.repo_host}/kickstart/home-esx-rock.ks ",
+    "inst.ks=http://${var.repo_host}/kickstart/home-esx-rock-cloud.ks ",
     "<enter>"
     #"<leftCtrlOn>c<leftCtrlOff>",
     #"debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
@@ -45,5 +45,5 @@ source "vmware-iso" "home-rock" {
 }
 
 build {
-  sources = ["sources.vmware-iso.home-rock"]
+  sources = ["sources.vmware-iso.home-rock-cloud"]
 }

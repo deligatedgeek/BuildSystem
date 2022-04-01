@@ -12,7 +12,6 @@ provider "esxi" {
   esxi_password = var.esxi_password
 }
 
-
 #########################################
 #  ESXI Guest resource
 #########################################
@@ -21,19 +20,16 @@ provider "esxi" {
 #  by terraform, but it will not boot to any OS.   It will however attempt
 #  to network boot.
 #
-resource "esxi_guest" "docker_swarm" {
-  for_each = toset(var.docker_nodes)
-  guest_name = each.value # Required, Specify the Guest Name
+resource "esxi_guest" "vmtesting" {
+  guest_name = "vmtesting01" # Required, Specify the Guest Name
   disk_store = "datastore1"   # Required, Specify an existing Disk Store
   network_interfaces {
     virtual_network = "VM Network" # Required for each network interface, Specify the Virtual Network name.
   }
   # clone_from_vm = "home-test"
-  ovf_source = "/home/deligatedgeek/git/BuildSystem/output-home-rock-cloud/packer-home-rock-cloud.ova"
-  
+  ovf_source = "/home/deligatedgeek/git/BuildSystem/output-home-rock/packer-home-rock.ova"
   guestinfo = {
-    "userdata.encoding" = "gzip+base64"
-    "userdata"          = base64gzip(templatefile("userdata.tpl",{HOSTNAME = each.value}))
+    "metadata.encoding" = "gzip+base64",
+    "metadata"          = base64gzip(templatefile("metadata.tpl",{HOSTNAME = "fred" }))
   }
 }
-
