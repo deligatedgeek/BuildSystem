@@ -21,7 +21,7 @@ provider "esxi" {
 #  to network boot.
 #
 resource "esxi_guest" "vmtesting" {
-  guest_name = "vmtesting01" # Required, Specify the Guest Name
+  guest_name = "home-rock-02" # Required, Specify the Guest Name
   disk_store = "datastore1"   # Required, Specify an existing Disk Store
   network_interfaces {
     virtual_network = "VM Network" # Required for each network interface, Specify the Virtual Network name.
@@ -30,6 +30,6 @@ resource "esxi_guest" "vmtesting" {
   ovf_source = "/home/deligatedgeek/git/BuildSystem/output-home-rock/packer-home-rock.ova"
   guestinfo = {
     "metadata.encoding" = "gzip+base64",
-    "metadata"          = base64gzip(templatefile("metadata.tpl",{HOSTNAME = "fred" }))
+    "metadata"          = base64gzip(templatefile("metadata.tpl",{HOSTNAME = "home-rock-02" }))
   }
 }
