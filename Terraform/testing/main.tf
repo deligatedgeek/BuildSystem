@@ -20,16 +20,16 @@ provider "esxi" {
 #  by terraform, but it will not boot to any OS.   It will however attempt
 #  to network boot.
 #
-resource "esxi_guest" "vmtesting" {
-  guest_name = "home-rock-02" # Required, Specify the Guest Name
+resource "esxi_guest" "vmtestrehostname" {
+  guest_name = "home-rock-03" # Required, Specify the Guest Name
   disk_store = "datastore1"   # Required, Specify an existing Disk Store
   network_interfaces {
     virtual_network = "VM Network" # Required for each network interface, Specify the Virtual Network name.
   }
   # clone_from_vm = "home-test"
-  ovf_source = "/home/deligatedgeek/git/BuildSystem/output-home-rock/packer-home-rock.ova"
+  ovf_source = "/home/deligatedgeek/git/BuildSystem/output-home-rock-cloud/packer-home-rock-cloud.ova"
   guestinfo = {
     "metadata.encoding" = "gzip+base64",
-    "metadata"          = base64gzip(templatefile("metadata.tpl",{HOSTNAME = "home-rock-02" }))
+    "metadata"          = base64gzip(templatefile("metadata.tpl",{HOSTNAME = "home-rock-03" }))
   }
 }

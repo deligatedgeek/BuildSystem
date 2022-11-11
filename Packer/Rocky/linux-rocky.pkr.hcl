@@ -37,6 +37,7 @@ source "vmware-iso" "home-rock" {
     #"initrd=/install/initrd.gz -- <enter>"
   ]
   format = "ova"
+  output_directory = "../../ova"
   ssh_username = var.build_user
   ssh_password = var.build_password
   ssh_timeout = "20m"
