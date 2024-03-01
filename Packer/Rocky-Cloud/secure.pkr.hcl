@@ -3,7 +3,7 @@ variable "esx_password" {
   sensitive = true
 }
 variable "esx_host" {
-  default = "192.168.1.201"
+  default = "192.168.1.20"
   type =  string
   sensitive = true
 }
