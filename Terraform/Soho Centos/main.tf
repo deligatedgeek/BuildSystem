@@ -20,30 +20,17 @@ provider "esxi" {
 #  by terraform, but it will not boot to any OS.   It will however attempt
 #  to network boot.
 #
-resource "esxi_guest" "home-esx-pup-01" {
-  guest_name = "home-esx-pup-01" # Required, Specify the Guest Name
-  notes      = "Home Puppet Server"
-  disk_store = "datastore1"   # Required, Specify an existing Disk Store
-  boot_disk_size     = "30"
-  boot_disk_type     = "thin"
-  boot_firmware      = "bios"
-  resource_pool_name = "/"
-  memsize            = "2048"
-  numvcpus           = "2"
-  power              = "on"
+resource "esxi_guest" "VW-CENTOS-S-1-LDP02-GB" {
+  guest_name = "VW-CENTOS-S-1-LDP02-GB" # Required, Specify the Guest Name
+  disk_store = "datastora2tb"   # Required, Specify an existing Disk Store
+  #boot_disk_size = "100"
   network_interfaces {
     virtual_network = "VM Network" # Required for each network interface, Specify the Virtual Network name.
   }
   # clone_from_vm = "home-test"
-  ovf_source = "/home/deligatedgeek/git/BuildSystem/output-home-rock-cloud/packer-home-rock-cloud.ova"
+  ovf_source = "/Users/mark.ottaway/git/mine/BuildSystem/Packer/CentOS/packer-home-rock.ova"
   guestinfo = {
     "metadata.encoding" = "gzip+base64",
-    "metadata"          = base64gzip(templatefile("metadata.tpl",{
-      HOSTNAME = "home-esx-pup-01"
-      address = "192.168.1.21/24"
-      gateway = "192.168.1.254"
-      ns1     = "192.168.1.1"
-      ns2     = "192.168.1.254"
-    }))
+    "metadata"          = base64gzip(templatefile("metadata.tpl",{HOSTNAME = "VW-CENTOS-S-1-LDP02-GB" }))
   }
 }
