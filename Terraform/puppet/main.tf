@@ -35,15 +35,15 @@ resource "esxi_guest" "home-esx-pup-01" {
     virtual_network = "VM Network" # Required for each network interface, Specify the Virtual Network name.
   }
   # clone_from_vm = "home-test"
-  ovf_source = "/home/deligatedgeek/git/BuildSystem/output-home-rock-cloud/packer-home-rock-cloud.ova"
+  ovf_source = "/home/deligatedgeek/git/BuildSystem/ova/packer-home-rock-cloud.ova"
   guestinfo = {
     "metadata.encoding" = "gzip+base64",
     "metadata"          = base64gzip(templatefile("metadata.tpl",{
       HOSTNAME = "home-esx-pup-01"
       address = "192.168.1.21/24"
-      gateway = "192.168.254.1"
+      gateway = "192.168.1.254"
       ns1     = "192.168.1.1"
-      ns2     = "192.168.254.1"
+      ns2     = "192.168.1.254"
     }))
   }
 }

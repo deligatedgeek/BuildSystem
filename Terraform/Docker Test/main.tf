@@ -28,7 +28,7 @@ resource "esxi_guest" "home-dock-01" {
     virtual_network = "VM Network" # Required for each network interface, Specify the Virtual Network name.
   }
   # clone_from_vm = "home-test"
-  ovf_source = "/home/deligatedgeek/git/BuildSystem/output-home-rock-cloud/packer-home-rock-cloud.ova"
+  ovf_source = "/home/deligatedgeek/git/BuildSystem/ova/packer-home-rock-cloud.ova"
   guestinfo = {
     "metadata.encoding" = "gzip+base64",
     "metadata"          = base64gzip(templatefile("metadata.tpl",{HOSTNAME = "home-dock-01" }))
